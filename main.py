@@ -8,7 +8,7 @@ def parse(conf_file):
     params = conf.params()
 
     client = Client(params)
-    client.blocks()
+    client.analyze()
 
 def main():
     if len(sys.argv) < 2:
