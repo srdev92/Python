@@ -1,5 +1,6 @@
 from bitcoinrpc.authproxy import AuthServiceProxy, JSONRPCException
 from bitcoinlib.wallets import wallet_create_or_open
+import datetime
 
 from .mysql import MySQL
 from pprint import pprint
@@ -17,6 +18,8 @@ class Client:
         self.mysql_user     = params['Mysql']['user']         # mysql_user
         self.mysql_password = params['Mysql']['password']     # mysql_password
         self.mysql_database = params['Mysql']['database']     # mysql_database
+
+        self.sql = params['Sql']
 
         # self.create_wallet_table()
         self.create_mysql_connection()
@@ -48,6 +51,8 @@ class Client:
 
     def analyze(self):
         print("5. Analysing Blocks ...")
+        tx_sql = self.sql['bitcoin']
+
         pos = 0
         bc = 0
         while bc < self.block_count:
@@ -68,7 +73,9 @@ class Client:
                 pos += 1
                 print("\t", pos, ":", block['tx'][txc])
 
-                #rpc_client.gettransaction(block['tx'][txc])
+                tx = self.rpc_client.gettransaction(block['tx'][txc])
+                values = (block['tx'][txc], tx['sender'], tx['receiver'], datetime.datetime.now())
+                self.mysql.create(tx_sql, values)
 
                 txc += 1
             
