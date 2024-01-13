@@ -6,7 +6,7 @@ from .mysql import MySQL
 from pprint import pprint
 import logging
 
-class Client:
+class Miner:
     def __init__(self, params):
         self.rpc_user       = params['Client']['user']        # rpc_user
         self.rpc_password   = params['Client']['password']    # rpc_password

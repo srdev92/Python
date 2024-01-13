@@ -1,14 +1,14 @@
 import sys
 
 from scripts.conf import Conf
-from scripts.bitcoin_core import Client
+from scripts.miner import Miner
 
 def parse(conf_file):
     conf = Conf(conf_file)
     params = conf.params()
 
-    client = Client(params)
-    client.analyze()
+    miner = Miner(params)
+    miner.analyze()
 
 def main():
     if len(sys.argv) < 2:

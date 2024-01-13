@@ -40,3 +40,23 @@ else:
     transaction_id = 'da917699942e4a96272401b534381a75512eeebe8403084500bd637bd47168b3'
     transaction_details = rpc_client.gettransaction(transaction_id)
     print(transaction_details)
+
+"""
+    test
+"""
+import requests
+import json
+
+response = requests.get('https://blockchair.com/bitcoin/transaction/da917699942e4a96272401b534381a75512eeebe8403084500bd637bd47168b3')
+print(response.text)
+
+json_data = response.json()
+
+# Parse and process the JSON data
+if response.status_code == 200:
+    # Successful response
+    # Access the JSON data as a Python dictionary
+    print(json_data)
+else:
+    # Failed response
+    print("Error:", response.status_code)
