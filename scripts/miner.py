@@ -75,6 +75,13 @@ class Miner:
 
                 tx = self.rpc_client.gettransaction(block['tx'][txc])
                 values = (block['tx'][txc], tx['sender'], tx['receiver'], datetime.datetime.now())
+
+                """
+                tx = self.rpc_client.getrawtransaction(block['tx'][txc], 1)
+                tx['txid'], tx['height'], tx['confirmations'], tx['vin'][0]['value'], tx['vout'][0]['value']
+                values = (block['tx'][txc], tx['sender'], tx['receiver'], datetime.datetime.now())
+                """
+
                 self.mysql.create(tx_sql, values)
 
                 txc += 1
