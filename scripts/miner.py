@@ -77,6 +77,21 @@ class Miner:
                 values = (block['tx'][txc], tx['sender'], tx['receiver'], datetime.datetime.now())
 
                 """
+                transaction_info = rpc_connection.gettransaction(transaction_id)
+                sender_address = transaction_info["details"][0]["address"]
+                receiver_address = transaction_info["details"][1]["address"]
+                amount = transaction_info["details"][1]["amount"]
+                amount = transaction_info["amount"]
+                date = transaction_info["blocktime"]
+
+                # Print the extracted details
+                print(f"Sender Address: {sender_address}")
+                print(f"Receiver Address: {receiver_address}")
+                print(f"Amount: {amount}")
+                print(f"Date: {date}")
+                """
+
+                """
                 tx = self.rpc_client.getrawtransaction(block['tx'][txc], 1)
                 tx['txid'], tx['height'], tx['confirmations'], tx['vin'][0]['value'], tx['vout'][0]['value']
                 values = (block['tx'][txc], tx['sender'], tx['receiver'], datetime.datetime.now())
